@@ -1,0 +1,18 @@
+from fastapi import FastAPI, UploadFile, File, Form
+import pandas as pd
+import google.generativeai as genai
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+app = FastAPI()
+
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+
+@app.get("/")
+def home():
+    return {"message": "Sales Insight Automator API running"}
+
+@app.post("/upload")
+async def upload_file(file: UploadFile = File(...), email: st
